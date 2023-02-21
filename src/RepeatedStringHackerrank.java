@@ -5,21 +5,34 @@ import java.math.BigInteger;
  * @created 20/02/2023 5:03 PM
  **/
 public class RepeatedStringHackerrank {
+    /**
+     * url : https://www.hackerrank.com/challenges/repeated-string/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=warmup
+     * @param s
+     * @param n
+     * @return
+     */
     public static long getRepeatedString(String s, long n) {
         if (s.length() == 0) return 0L;
-        long length = n / s.length();
-        int quotient = (int) (n % s.length());
-        StringBuilder finalString = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            finalString.append(s);
+        // fullStringRepeatCount represents total number of times the string s will be repeated in the string of length n
+        long fullStringRepeatCount = n / s.length();
+        // subStringLength represents the remaining part of string in the string of length n after string s are repeated
+        // fullStringRepeatCount times
+        int subStringLength = (int) (n % s.length());
+        long count = 0;
+        long repetition;
+        // count number of time a is repeated in string s
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == 'a') count++;
         }
-        System.out.println(finalString);
-        finalString.append(s, 0, quotient);
-        int count = 0;
-        for (int i = 0; i < finalString.length(); i++) {
-            if (finalString.toString().charAt(i) == 'a') count++;
+        // if a is repeated count times in string s , it is repeated fullStringRepeatCount times count in infinite string
+        repetition = fullStringRepeatCount * count;
+        count = 0;
+        // count number of times a is repeated in substring of infinite string
+        for (int i = 0; i < s.substring(0, subStringLength).length(); i++) {
+            if (s.charAt(i) == 'a') count++;
         }
-        return count;
+        // total repetition includes previous total count and count of a in substring
+        return repetition + count;
     }
 
     public static void main(String[] args) {
