@@ -10,13 +10,13 @@ import java.util.Map;
 public class CheckMagazineDay6 {
     public static void checkMagazine(List<String> magazine, List<String> note) {
         boolean publish = true;
-        Map<String, Boolean> magazineUseMap = new HashMap<>();
+        Map<String, Integer> magazineUseMap = new HashMap<>();
         for (String m : magazine) {
-            magazineUseMap.put(m, false);
+            magazineUseMap.put(m, magazineUseMap.get(m) == null ? 1 : magazineUseMap.get(m) + 1);
         }
         for (String s : note) {
-            if (magazineUseMap.containsKey(s) && !magazineUseMap.get(s)) {
-                magazineUseMap.put(s, true);
+            if (magazineUseMap.containsKey(s) && magazineUseMap.get(s) > 0) {
+                magazineUseMap.put(s, magazineUseMap.get(s) - 1);
             } else {
                 publish = false;
                 break;
