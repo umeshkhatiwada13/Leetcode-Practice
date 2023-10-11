@@ -3,7 +3,7 @@ import java.util.Comparator;
 import java.util.Objects;
 
 /**
- * @author umeshkhatiwada13@infodev
+ * @author umeshkhatiwada13
  * @project Leetcode
  * @created 08/10/2023 - 16:06
  */

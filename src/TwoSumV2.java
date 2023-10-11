@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author umeshkhatiwada13@infodev
+ * @author umeshkhatiwada13
  * @project Leetcode-Practice
  * @created 27/09/2022 - 21:04
  */

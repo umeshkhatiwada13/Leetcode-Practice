@@ -1,36 +1,59 @@
 package Neetcode150.SlidingWindow;
 
 /**
- * @author umeshkhatiwada13@infodev
+ * @author umeshkhatiwada13
  * @project Leetcode
  * @created 10/10/2023 - 23:20
  */
 public class BestTimeToBuyAndSellStock121Easy {
     public static int maxProfit1(int[] prices) {
-        int maxProfit = 0;
-        int arrayLength = prices.length;
-        short leftPointer = 0;
-        short rightPointer = 1;
+        int maxProfit = 0;  // Initialize the maximum profit to 0.
+        int arrayLength = prices.length;  // Get the length of the input array.
+        int leftPointer = 0;  // Initialize the left pointer to the start of the array.
+        int rightPointer = 1;  // Initialize the right pointer to one position ahead of the left pointer.
+
+        // Loop through the array from left to right.
         for (int i = 0; i <= arrayLength - 1; i++) {
+            // Inner loop to compare prices with the leftPointer as the buy and rightPointer as the sell.
             while (rightPointer < arrayLength) {
-                maxProfit = Math.max(maxProfit, prices[rightPointer] - prices[leftPointer]);
-                rightPointer++;
+                // Calculate the potential profit by selling at the rightPointer and buying at the leftPointer.
+                int potentialProfit = prices[rightPointer] - prices[leftPointer];
+                // Update maxProfit with the maximum profit found so far.
+                maxProfit = Math.max(maxProfit, potentialProfit);
+                rightPointer++;  // Move the rightPointer to the right.
             }
-            leftPointer++;
-            rightPointer = (short) (leftPointer + 1);
+
+            leftPointer++;  // Move the leftPointer to the right.
+            rightPointer = leftPointer + 1;  // Reset the rightPointer to one position ahead of the new leftPointer.
         }
-        return maxProfit;
+
+        return maxProfit;  // Return the maximum profit found.
     }
 
+
     public static int maxProfit2(int[] prices) {
-        int minPrice = Integer.MAX_VALUE;
-        int profit = 0;
+        int minPrice = Integer.MAX_VALUE;  // Initialize minPrice to a very high value.
+        int profit = 0;  // Initialize profit to 0.
+
+        // Loop through the array of stock prices.
         for (int price : prices) {
-            if (price < minPrice) minPrice = price;
-            if (price - minPrice > profit) profit = price - minPrice;
+            // Check if the current price is lower than the minimum price seen so far.
+            if (price < minPrice)
+                minPrice = price;  // If yes, update the minimum price to the current price.
+
+            // Calculate the potential profit if selling at the current price and buying at the minimum price.
+            int potentialProfit = price - minPrice;
+
+            // Check if the potential profit is greater than the current maximum profit.
+            if (potentialProfit > profit)
+                profit = potentialProfit;  // If yes, update the maximum profit.
+
+            // The loop continues to the next price in the array.
         }
-        return profit;
+
+        return profit;  // Return the maximum profit found.
     }
+
 
     public static void main(String[] args) {
         System.out.println(maxProfit2(new int[]{7, 1, 5, 3, 6, 4}));
