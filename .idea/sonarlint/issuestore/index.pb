@@ -13,3 +13,5 @@ N
 src/MaximumWealth1672Easy.java,7\c\7cc6632a16a6fb7940e7aadd453634b0d7d661a0
 \
 ,src/NumberOfStepsToReduceToZero1342Easy.java,9\3\931633eb19fe640d0005931c2927fdba1a477b9e
+I
+src/IsAnagram242Easy.java,1\b\1bfde4d5f5f455b8d5f9522a3d39c2fabeb3ee43

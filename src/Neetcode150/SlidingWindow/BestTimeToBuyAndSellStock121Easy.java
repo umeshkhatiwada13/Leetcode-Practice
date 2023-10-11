@@ -6,7 +6,7 @@ package Neetcode150.SlidingWindow;
  * @created 10/10/2023 - 23:20
  */
 public class BestTimeToBuyAndSellStock121Easy {
-    public static int maxProfit(int[] prices) {
+    public static int maxProfit1(int[] prices) {
         int maxProfit = 0;
         int arrayLength = prices.length;
         short leftPointer = 0;
@@ -22,8 +22,18 @@ public class BestTimeToBuyAndSellStock121Easy {
         return maxProfit;
     }
 
+    public static int maxProfit2(int[] prices) {
+        int minPrice = Integer.MAX_VALUE;
+        int profit = 0;
+        for (int price : prices) {
+            if (price < minPrice) minPrice = price;
+            if (price - minPrice > profit) profit = price - minPrice;
+        }
+        return profit;
+    }
+
     public static void main(String[] args) {
-        System.out.println(maxProfit(new int[]{7, 1, 5, 3, 6, 4}));
-        System.out.println(maxProfit(new int[]{7, 6, 4, 3, 1}));
+        System.out.println(maxProfit2(new int[]{7, 1, 5, 3, 6, 4}));
+        System.out.println(maxProfit1(new int[]{7, 6, 4, 3, 1}));
     }
 }
