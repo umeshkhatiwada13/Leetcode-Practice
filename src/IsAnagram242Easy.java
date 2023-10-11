@@ -25,6 +25,20 @@ public class IsAnagram242Easy {
         return true;
     }
 
+    //Second approach to solve the same question
+    public static boolean isAnagram2(String s, String t) {
+        if (s.length() != t.length()) return false;
+        int[] char_count = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            char_count[s.charAt(i) - 'a']++;
+            char_count[t.charAt(i) - 'a']--;
+        }
+        for (int i = 0; i < char_count.length; i++) {
+            if (char_count[i] != 0) return false;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         System.out.println("Is anagram " + isAnagram("anagram", "anagrm"));
     }
