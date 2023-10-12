@@ -2,6 +2,8 @@ package Neetcode150.TwoPointers;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Stack;
 
 /**
  * @author umeshkhatiwada13
@@ -11,24 +13,21 @@ import java.util.Map;
 public class ValidParentheses20Easy {
     public static boolean isValid(String s) {
         if (s.length() % 2 != 0) return false;
-        Map<Character, Integer> bracketCounter = new HashMap<>();
-        for (int i = 0; i < s.length(); i++) {
-            char[] sArray = s.toCharArray();
-            Map<Character, Character> bracketPair = new HashMap<>();
-            bracketPair.put(']', '[');
-            bracketPair.put(')', '(');
-            bracketPair.put('}', '{');
-            if (i < s.length() / 2) {
-                bracketCounter.put(sArray[i], bracketCounter.getOrDefault(sArray[i], 0) + 1);
+        Stack<Character> stack = new Stack<>();
+        Map<Character, Character> bracketPair = new HashMap<>();
+        bracketPair.put('(', ')');
+        bracketPair.put('{', '}');
+        bracketPair.put('[', ']');
+        for (char ch : s.toCharArray()) {
+            if (ch == '(' | ch == '{' | ch == '[') {
+                stack.push(bracketPair.get(ch));
             } else {
-                bracketCounter.put(bracketPair.get(sArray[i]), bracketCounter.getOrDefault(bracketPair.get(sArray[i]), 0) > 0 ? bracketCounter.getOrDefault(bracketPair.get(sArray[i]), 0) - 1 : 0);
+                if (!stack.isEmpty() && Objects.equals(stack.peek(), ch)) {
+                    stack.pop();
+                } else return false;
             }
         }
-        int sum = 0;
-        for (Map.Entry<Character, Integer> a : bracketCounter.entrySet()) {
-            sum += a.getValue();
-        }
-        return sum == 0;
+        return stack.isEmpty();
     }
 
     public static void main(String[] args) {
