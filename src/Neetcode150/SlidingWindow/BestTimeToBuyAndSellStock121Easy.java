@@ -8,23 +8,19 @@ package Neetcode150.SlidingWindow;
 public class BestTimeToBuyAndSellStock121Easy {
     public static int maxProfit1(int[] prices) {
         int maxProfit = 0;  // Initialize the maximum profit to 0.
-        int arrayLength = prices.length;  // Get the length of the input array.
         int leftPointer = 0;  // Initialize the left pointer to the start of the array.
         int rightPointer = 1;  // Initialize the right pointer to one position ahead of the left pointer.
-
-        // Loop through the array from left to right.
-        for (int i = 0; i <= arrayLength - 1; i++) {
-            // Inner loop to compare prices with the leftPointer as the buy and rightPointer as the sell.
-            while (rightPointer < arrayLength) {
+        // Inner loop to compare prices with the leftPointer as the buy and rightPointer as the sell.
+        while (rightPointer < prices.length) {
+            if (prices[rightPointer] > prices[leftPointer]) {
                 // Calculate the potential profit by selling at the rightPointer and buying at the leftPointer.
                 int potentialProfit = prices[rightPointer] - prices[leftPointer];
                 // Update maxProfit with the maximum profit found so far.
                 maxProfit = Math.max(maxProfit, potentialProfit);
-                rightPointer++;  // Move the rightPointer to the right.
+            } else {
+                leftPointer = rightPointer;
             }
-
-            leftPointer++;  // Move the leftPointer to the right.
-            rightPointer = leftPointer + 1;  // Reset the rightPointer to one position ahead of the new leftPointer.
+            rightPointer++;  // Move the rightPointer to the right.
         }
 
         return maxProfit;  // Return the maximum profit found.
