@@ -1,7 +1,5 @@
 package Neetcode150.BinarySearch;
 
-import java.util.Arrays;
-
 /**
  * @author umeshkhatiwada13
  * @project Leetcode
@@ -9,25 +7,18 @@ import java.util.Arrays;
  */
 public class BinarySearch704Easy {
     public static int search(int[] nums, int target) {
-        int mid = nums.length / 2;
         int left = 0;
         int right = nums.length - 1;
-        int targetIndex = -1;
-        boolean found = false;
-        int[] newArray = Arrays.copyOfRange(nums, left, right);
-        ;
-        while (!found) {
-            newArray = Arrays.copyOfRange(newArray, left, right);
-            if (target == nums[mid]) {
-                found = true;
-                targetIndex = mid;
-            } else if (target < nums[mid]) {
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (nums[mid] == target) return mid;
+            else if (nums[mid] > target) {
                 right = mid - 1;
             } else {
                 left = mid + 1;
             }
         }
-        return targetIndex;
+        return -1;
     }
 
     public static void main(String[] args) {
